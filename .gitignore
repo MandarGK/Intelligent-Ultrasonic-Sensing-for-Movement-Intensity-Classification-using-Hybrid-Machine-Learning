@@ -1,0 +1,71 @@
+# Python cache
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Build files
+build/
+dist/
+*.egg-info/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Operating system files
+.DS_Store
+._*
+Thumbs.db
+Desktop.ini
+__MACOSX/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Raw datasets and recordings
+Data/
+data/
+datasets/
+raw_data/
+*.csv
+*.wav
+
+# Generated experiment outputs
+artifacts/
+outputs/
+results/
+runs/
+checkpoints/
+logs/
+*.log
+
+# Arrays, models and serialized files
+*.npy
+*.npz
+*.pt
+*.pth
+*.ckpt
+*.joblib
+*.pkl
+*.pickle
+
+# Temporary files
+*.tmp
+*.temp

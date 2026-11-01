@@ -1,0 +1,837 @@
+    epoch 18/30  train_loss=0.0094  val_loss=0.0028  val_acc=0.9988
+    epoch 19/30  batch 374/374  running_train_loss=0.0120
+    epoch 19/30  train_loss=0.0120  val_loss=0.6285  val_acc=0.7058
+    epoch 20/30  batch 374/374  running_train_loss=0.0136
+    epoch 20/30  train_loss=0.0136  val_loss=0.0043  val_acc=0.9995
+    epoch 21/30  batch 374/374  running_train_loss=0.0090
+    epoch 21/30  train_loss=0.0090  val_loss=0.0030  val_acc=0.9993
+    early stopping at epoch 21 (no val improvement for 5 epochs)
+  -> val_f1=0.9992  val_loss=0.0025
+
+Training with hp={'base_channels': 32, 'num_blocks': 3, 'dropout': 0.4, 'epochs': 30, 'batch_size': 64, 'lr': 0.0005, 'patience': 5, 'num_workers': 2}
+    Device: mps
+    Apple Silicon MPS acceleration: ENABLED
+    DataLoader workers: 2
+    23923 train / 5979 val recordings, batch_size=64 -> 374 batches/epoch
+    epoch 1/30  batch 374/374  running_train_loss=0.2260
+    epoch 1/30  train_loss=0.2260  val_loss=0.0788  val_acc=0.9635
+    epoch 2/30  batch 374/374  running_train_loss=0.0549
+    epoch 2/30  train_loss=0.0549  val_loss=0.0136  val_acc=0.9968
+    epoch 3/30  batch 374/374  running_train_loss=0.0269
+    epoch 3/30  train_loss=0.0269  val_loss=0.0120  val_acc=0.9977
+    epoch 4/30  batch 374/374  running_train_loss=0.0248
+    epoch 4/30  train_loss=0.0248  val_loss=0.0103  val_acc=0.9973
+    epoch 5/30  batch 374/374  running_train_loss=0.0244
+    epoch 5/30  train_loss=0.0244  val_loss=0.0528  val_acc=0.9856
+    epoch 6/30  batch 374/374  running_train_loss=0.0233
+    epoch 6/30  train_loss=0.0233  val_loss=0.0120  val_acc=0.9957
+    epoch 7/30  batch 374/374  running_train_loss=0.0186
+    epoch 7/30  train_loss=0.0186  val_loss=0.0051  val_acc=0.9990
+    epoch 8/30  batch 374/374  running_train_loss=0.0154
+    epoch 8/30  train_loss=0.0154  val_loss=0.0360  val_acc=0.9831
+    epoch 9/30  batch 374/374  running_train_loss=0.0258
+    epoch 9/30  train_loss=0.0258  val_loss=0.0061  val_acc=0.9980
+    epoch 10/30  batch 374/374  running_train_loss=0.0151
+    epoch 10/30  train_loss=0.0151  val_loss=0.0100  val_acc=0.9968
+    epoch 11/30  batch 374/374  running_train_loss=0.0138
+    epoch 11/30  train_loss=0.0138  val_loss=0.0449  val_acc=0.9814
+    epoch 12/30  batch 374/374  running_train_loss=0.0194
+    epoch 12/30  train_loss=0.0194  val_loss=0.0062  val_acc=0.9988
+    early stopping at epoch 12 (no val improvement for 5 epochs)
+  -> val_f1=0.9992  val_loss=0.0051
+
+FROZEN best cnn2d: hp={'base_channels': 32, 'num_blocks': 3, 'dropout': 0.4, 'epochs': 30, 'batch_size': 64, 'lr': 0.0005, 'patience': 5, 'num_workers': 2}  val_f1=0.9992  saved to artifacts/phase5/position_normalized_cnn2d/frozen_models/cnn2d.pt
+
+Saved: artifacts/phase5/position_normalized_cnn2d/env1_val_model_selection_summary.csv, hyperparameter_search_log.json
+Phase 5 (Env1 development) complete for this branch/architecture. Model is FROZEN.
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ python phase5_deep_learning.py test  --manifest artifacts/phase3/master_manifest.csv  --binary-dir artifacts/phase3/binary  --branch position_normalized  --architecture cnn2d  --scaler-path artifacts/phase3/scaler.json  --out-dir artifacts/phase5 
+Branch=position_normalized  Architecture=cnn2d  test set: 29097 recordings
+PyTorch device: mps
+
+Saved: artifacts/phase5/position_normalized_cnn2d/env2_test_predictions.csv
+
+model x environment:
+                    model environment  accuracy  precision   recall       f1  roc_auc    tp   tn   fp  fn     n
+cnn2d_position_normalized        Env2  0.862872   0.840518 0.980864 0.905284 0.977833 19068 6039 3618 372 29097
+
+model x condition:
+                    model     condition  accuracy  precision   recall       f1 roc_auc   tp   tn   fp  fn    n
+cnn2d_position_normalized    ChairTable  0.335334        0.0 0.000000 0.000000    None    0 1676 3322   0 4998
+cnn2d_position_normalized     EmptyRoom  0.936467        0.0 0.000000 0.000000    None    0 4363  296   0 4659
+cnn2d_position_normalized  HumanReading  0.963613        1.0 0.963613 0.981470    None 9163    0    0 346 9509
+cnn2d_position_normalized HumanStanding  0.997382        1.0 0.997382 0.998689    None 9905    0    0  26 9931
+
+model x subject:
+                    model subject  accuracy  precision   recall       f1 roc_auc   tp  tn  fp  fn    n
+cnn2d_position_normalized    LILY  0.979864        1.0 0.979864 0.989829    None 9781   0   0 201 9982
+cnn2d_position_normalized      OS  0.981920        1.0 0.981920 0.990878    None 9287   0   0 171 9458
+
+model x activity:
+                    model activity  accuracy  precision   recall       f1 roc_auc   tp  tn  fp  fn    n
+cnn2d_position_normalized  Reading  0.963613        1.0 0.963613 0.981470    None 9163   0   0 346 9509
+cnn2d_position_normalized Standing  0.997382        1.0 0.997382 0.998689    None 9905   0   0  26 9931
+
+Phase 5 (Env2 final test) complete for cnn2d_position_normalized.
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ deactivate 
+Mandars-MacBook-Pro:Chap7 mandarkale$ source venv/bin/activate
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ python3 rq6_standing_vs_reading_single.py develop --model-family cnn  --manifest artifacts/phase3/master_manifest.csv --binary-dir artifacts/phase3/binary  --branch position_normalized  --architecture cnn1d  --scaler-path artifacts/phase3/scaler.json --out-dir artifacts/rq6  --num-workers 2
+PyTorch: 2.14.0
+PyTorch device: mps
+Apple Silicon MPS acceleration: ENABLED
+
+RQ6 CNN development
+Branch=position_normalized  Architecture=cnn1d  amplitude_normalize=False
+train HUMAN-only: n=15927  activity balance={'Standing': 7978, 'Reading': 7949}
+val HUMAN-only: n=3980  activity balance={'Standing': 1996, 'Reading': 1984}
+DataLoader workers: 2
+Position-aware = explicit posture/distance baseline; position-normalized = intended micro-motion test.
+
+
+Training CNN candidate: {'base_channels': 16, 'num_blocks': 3, 'dropout': 0.3, 'epochs': 30, 'batch_size': 64, 'lr': 0.001, 'patience': 5, 'num_workers': 2}
+    Device: mps | DataLoader workers: 2 | 15927 train / 3980 val | 249 batches/epoch
+    epoch 1/30  batch 249/249  running_train_loss=0.0942
+    epoch 1/30  train_loss=0.0942  val_loss=0.0292  val_acc=0.9920
+    epoch 2/30  batch 249/249  running_train_loss=0.0260
+    epoch 2/30  train_loss=0.0260  val_loss=0.0298  val_acc=0.9910
+    epoch 3/30  batch 249/249  running_train_loss=0.0249
+    epoch 3/30  train_loss=0.0249  val_loss=0.0348  val_acc=0.9867
+    epoch 4/30  batch 249/249  running_train_loss=0.0212
+    epoch 4/30  train_loss=0.0212  val_loss=0.0285  val_acc=0.9935
+    epoch 5/30  batch 249/249  running_train_loss=0.0191
+    epoch 5/30  train_loss=0.0191  val_loss=0.0199  val_acc=0.9942
+    epoch 6/30  batch 249/249  running_train_loss=0.0206
+    epoch 6/30  train_loss=0.0206  val_loss=0.0248  val_acc=0.9922
+    epoch 7/30  batch 249/249  running_train_loss=0.0139
+    epoch 7/30  train_loss=0.0139  val_loss=0.0186  val_acc=0.9950
+    epoch 8/30  batch 249/249  running_train_loss=0.0188
+    epoch 8/30  train_loss=0.0188  val_loss=0.0179  val_acc=0.9965
+    epoch 9/30  batch 249/249  running_train_loss=0.0125
+    epoch 9/30  train_loss=0.0125  val_loss=0.0155  val_acc=0.9952
+    epoch 10/30  batch 249/249  running_train_loss=0.0132
+    epoch 10/30  train_loss=0.0132  val_loss=0.0146  val_acc=0.9957
+    epoch 11/30  batch 249/249  running_train_loss=0.0121
+    epoch 11/30  train_loss=0.0121  val_loss=0.0125  val_acc=0.9965
+    epoch 12/30  batch 249/249  running_train_loss=0.0099
+    epoch 12/30  train_loss=0.0099  val_loss=0.0132  val_acc=0.9960
+    epoch 13/30  batch 249/249  running_train_loss=0.0103
+    epoch 13/30  train_loss=0.0103  val_loss=0.0195  val_acc=0.9930
+    epoch 14/30  batch 249/249  running_train_loss=0.0084
+    epoch 14/30  train_loss=0.0084  val_loss=0.0129  val_acc=0.9955
+    epoch 15/30  batch 249/249  running_train_loss=0.0093
+    epoch 15/30  train_loss=0.0093  val_loss=0.0089  val_acc=0.9972
+    epoch 16/30  batch 249/249  running_train_loss=0.0090
+    epoch 16/30  train_loss=0.0090  val_loss=0.0080  val_acc=0.9967
+    epoch 17/30  batch 249/249  running_train_loss=0.0085
+    epoch 17/30  train_loss=0.0085  val_loss=0.0091  val_acc=0.9967
+    epoch 18/30  batch 249/249  running_train_loss=0.0074
+    epoch 18/30  train_loss=0.0074  val_loss=0.0106  val_acc=0.9990
+    epoch 19/30  batch 249/249  running_train_loss=0.0081
+    epoch 19/30  train_loss=0.0081  val_loss=0.0066  val_acc=0.9975
+    epoch 20/30  batch 249/249  running_train_loss=0.0071
+    epoch 20/30  train_loss=0.0071  val_loss=0.0092  val_acc=0.9950
+    epoch 21/30  batch 249/249  running_train_loss=0.0058
+    epoch 21/30  train_loss=0.0058  val_loss=0.0071  val_acc=0.9990
+    epoch 22/30  batch 249/249  running_train_loss=0.0089
+    epoch 22/30  train_loss=0.0089  val_loss=0.0073  val_acc=0.9985
+    epoch 23/30  batch 249/249  running_train_loss=0.0067
+    epoch 23/30  train_loss=0.0067  val_loss=0.0073  val_acc=0.9975
+    epoch 24/30  batch 249/249  running_train_loss=0.0065
+    epoch 24/30  train_loss=0.0065  val_loss=0.0112  val_acc=0.9952
+    early stopping at epoch 24 (no val improvement for 5 epochs)
+  -> val_accuracy=0.9975 val_f1=0.9975 val_roc_auc=0.999977778136919
+
+Training CNN candidate: {'base_channels': 32, 'num_blocks': 3, 'dropout': 0.4, 'epochs': 30, 'batch_size': 64, 'lr': 0.0005, 'patience': 5, 'num_workers': 2}
+    Device: mps | DataLoader workers: 2 | 15927 train / 3980 val | 249 batches/epoch
+    epoch 1/30  batch 249/249  running_train_loss=0.0834
+    epoch 1/30  train_loss=0.0834  val_loss=0.0277  val_acc=0.9920
+    epoch 2/30  batch 249/249  running_train_loss=0.0233
+    epoch 2/30  train_loss=0.0233  val_loss=0.0241  val_acc=0.9922
+    epoch 3/30  batch 249/249  running_train_loss=0.0219
+    epoch 3/30  train_loss=0.0219  val_loss=0.0329  val_acc=0.9887
+    epoch 4/30  batch 249/249  running_train_loss=0.0166
+    epoch 4/30  train_loss=0.0166  val_loss=0.0278  val_acc=0.9902
+    epoch 5/30  batch 249/249  running_train_loss=0.0175
+    epoch 5/30  train_loss=0.0175  val_loss=0.0222  val_acc=0.9937
+    epoch 6/30  batch 249/249  running_train_loss=0.0149
+    epoch 6/30  train_loss=0.0149  val_loss=0.0158  val_acc=0.9960
+    epoch 7/30  batch 249/249  running_train_loss=0.0141
+    epoch 7/30  train_loss=0.0141  val_loss=0.0203  val_acc=0.9935
+    epoch 8/30  batch 249/249  running_train_loss=0.0109
+    epoch 8/30  train_loss=0.0109  val_loss=0.0166  val_acc=0.9955
+    epoch 9/30  batch 249/249  running_train_loss=0.0116
+    epoch 9/30  train_loss=0.0116  val_loss=0.0146  val_acc=0.9962
+    epoch 10/30  batch 249/249  running_train_loss=0.0114
+    epoch 10/30  train_loss=0.0114  val_loss=0.0166  val_acc=0.9932
+    epoch 11/30  batch 249/249  running_train_loss=0.0114
+    epoch 11/30  train_loss=0.0114  val_loss=0.0196  val_acc=0.9927
+    epoch 12/30  batch 249/249  running_train_loss=0.0091
+    epoch 12/30  train_loss=0.0091  val_loss=0.0106  val_acc=0.9955
+    epoch 13/30  batch 249/249  running_train_loss=0.0097
+    epoch 13/30  train_loss=0.0097  val_loss=0.0097  val_acc=0.9970
+    epoch 14/30  batch 249/249  running_train_loss=0.0071
+    epoch 14/30  train_loss=0.0071  val_loss=0.0076  val_acc=0.9980
+    epoch 15/30  batch 249/249  running_train_loss=0.0076
+    epoch 15/30  train_loss=0.0076  val_loss=0.0117  val_acc=0.9955
+    epoch 16/30  batch 249/249  running_train_loss=0.0068
+    epoch 16/30  train_loss=0.0068  val_loss=0.0067  val_acc=0.9990
+    epoch 17/30  batch 249/249  running_train_loss=0.0069
+    epoch 17/30  train_loss=0.0069  val_loss=0.0086  val_acc=0.9980
+    epoch 18/30  batch 249/249  running_train_loss=0.0069
+    epoch 18/30  train_loss=0.0069  val_loss=0.0101  val_acc=0.9962
+    epoch 19/30  batch 249/249  running_train_loss=0.0053
+    epoch 19/30  train_loss=0.0053  val_loss=0.0059  val_acc=0.9990
+    epoch 20/30  batch 249/249  running_train_loss=0.0071
+    epoch 20/30  train_loss=0.0071  val_loss=0.0282  val_acc=0.9887
+    epoch 21/30  batch 249/249  running_train_loss=0.0062
+    epoch 21/30  train_loss=0.0062  val_loss=0.0054  val_acc=0.9967
+    epoch 22/30  batch 249/249  running_train_loss=0.0052
+    epoch 22/30  train_loss=0.0052  val_loss=0.0047  val_acc=0.9987
+    epoch 23/30  batch 249/249  running_train_loss=0.0046
+    epoch 23/30  train_loss=0.0046  val_loss=0.0084  val_acc=0.9970
+    epoch 24/30  batch 249/249  running_train_loss=0.0062
+    epoch 24/30  train_loss=0.0062  val_loss=0.0043  val_acc=0.9987
+    epoch 25/30  batch 249/249  running_train_loss=0.0056
+    epoch 25/30  train_loss=0.0056  val_loss=0.0089  val_acc=0.9972
+    epoch 26/30  batch 249/249  running_train_loss=0.0060
+    epoch 26/30  train_loss=0.0060  val_loss=0.0044  val_acc=0.9990
+    epoch 27/30  batch 249/249  running_train_loss=0.0046
+    epoch 27/30  train_loss=0.0046  val_loss=0.0045  val_acc=0.9987
+    epoch 28/30  batch 249/249  running_train_loss=0.0052
+    epoch 28/30  train_loss=0.0052  val_loss=0.0039  val_acc=0.9985
+    epoch 29/30  batch 249/249  running_train_loss=0.0039
+    epoch 29/30  train_loss=0.0039  val_loss=0.0028  val_acc=0.9985
+    epoch 30/30  batch 249/249  running_train_loss=0.0049
+    epoch 30/30  train_loss=0.0049  val_loss=0.0038  val_acc=0.9990
+  -> val_accuracy=0.9985 val_f1=0.9985 val_roc_auc=0.9999946970554012
+
+FROZEN model saved: artifacts/rq6/position_normalized_cnn1d/frozen_models/cnn1d.pt
+Best Env1-val F1: 0.9985
+RQ6 Env1 development complete: artifacts/rq6/position_normalized_cnn1d
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ python3 rq6_standing_vs_reading_single.py test --model-family cnn  --manifest artifacts/phase3/master_manifest.csv --binary-dir artifacts/phase3/binary  --branch position_normalized  --architecture cnn1d  --scaler-path artifacts/phase3/scaler.json --out-dir artifacts/rq6  --num-workers 2
+PyTorch: 2.14.0
+PyTorch device: mps
+Apple Silicon MPS acceleration: ENABLED
+
+RQ6 CNN Env2 test
+Branch=position_normalized  Architecture=cnn1d  amplitude_normalize=False
+Env2 test HUMAN-only: n=19440  activity balance={'Standing': 9931, 'Reading': 9509}
+
+Env2 TEST metrics (frozen Env1 model):
+  accuracy: 0.9529835390946502
+  precision: 0.9583022288578437
+  recall: 0.9449994741823535
+  f1: 0.9516043630202267
+  roc_auc: 0.9956792148716035
+  tp: 8986
+  tn: 9540
+  fp: 391
+  fn: 523
+
+Saved predictions and aggregates to: artifacts/rq6/position_normalized_cnn1d
+
+Interpretation guardrail: position_aware measures separability that may be explained by posture/distance; position_normalized is the RQ6 micro-motion test.
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ python3 rq6_standing_vs_reading_single.py develop --model-family cnn  --manifest artifacts/phase3/master_manifest.csv --binary-dir artifacts/phase3/binary  --branch position_aware  --architecture cnn1d  --scaler-path artifacts/phase3/scaler.json --out-dir artifacts/rq6  --num-workers 2
+PyTorch: 2.14.0
+PyTorch device: mps
+Apple Silicon MPS acceleration: ENABLED
+
+RQ6 CNN development
+Branch=position_aware  Architecture=cnn1d  amplitude_normalize=False
+train HUMAN-only: n=16000  activity balance={'Standing': 8000, 'Reading': 8000}
+val HUMAN-only: n=4000  activity balance={'Standing': 2000, 'Reading': 2000}
+DataLoader workers: 2
+Position-aware = explicit posture/distance baseline; position-normalized = intended micro-motion test.
+
+
+Training CNN candidate: {'base_channels': 16, 'num_blocks': 3, 'dropout': 0.3, 'epochs': 30, 'batch_size': 64, 'lr': 0.001, 'patience': 5, 'num_workers': 2}
+    Device: mps | DataLoader workers: 2 | 16000 train / 4000 val | 250 batches/epoch
+    epoch 1/30  batch 250/250  running_train_loss=0.2394
+    epoch 1/30  train_loss=0.2394  val_loss=0.2249  val_acc=0.9423
+    epoch 2/30  batch 250/250  running_train_loss=0.0814
+    epoch 2/30  train_loss=0.0814  val_loss=0.0796  val_acc=0.9840
+    epoch 3/30  batch 250/250  running_train_loss=0.0663
+    epoch 3/30  train_loss=0.0663  val_loss=0.0566  val_acc=0.9835
+    epoch 4/30  batch 250/250  running_train_loss=0.0490
+    epoch 4/30  train_loss=0.0490  val_loss=0.0653  val_acc=0.9818
+    epoch 5/30  batch 250/250  running_train_loss=0.0407
+    epoch 5/30  train_loss=0.0407  val_loss=0.0163  val_acc=0.9962
+    epoch 6/30  batch 250/250  running_train_loss=0.0365
+    epoch 6/30  train_loss=0.0365  val_loss=0.0167  val_acc=0.9948
+    epoch 7/30  batch 250/250  running_train_loss=0.0333
+    epoch 7/30  train_loss=0.0333  val_loss=0.0281  val_acc=0.9910
+    epoch 8/30  batch 250/250  running_train_loss=0.0334
+    epoch 8/30  train_loss=0.0334  val_loss=0.0180  val_acc=0.9952
+    epoch 9/30  batch 250/250  running_train_loss=0.0353
+    epoch 9/30  train_loss=0.0353  val_loss=0.0464  val_acc=0.9885
+    epoch 10/30  batch 250/250  running_train_loss=0.0248
+    epoch 10/30  train_loss=0.0248  val_loss=0.0117  val_acc=0.9972
+    epoch 11/30  batch 250/250  running_train_loss=0.0236
+    epoch 11/30  train_loss=0.0236  val_loss=0.0319  val_acc=0.9895
+    epoch 12/30  batch 250/250  running_train_loss=0.0201
+    epoch 12/30  train_loss=0.0201  val_loss=0.0067  val_acc=0.9990
+    epoch 13/30  batch 250/250  running_train_loss=0.0191
+    epoch 13/30  train_loss=0.0191  val_loss=0.0072  val_acc=0.9990
+    epoch 14/30  batch 250/250  running_train_loss=0.0203
+    epoch 14/30  train_loss=0.0203  val_loss=0.0157  val_acc=0.9938
+    epoch 15/30  batch 250/250  running_train_loss=0.0198
+    epoch 15/30  train_loss=0.0198  val_loss=0.0503  val_acc=0.9810
+    epoch 16/30  batch 250/250  running_train_loss=0.0151
+    epoch 16/30  train_loss=0.0151  val_loss=0.0410  val_acc=0.9872
+    epoch 17/30  batch 250/250  running_train_loss=0.0168
+    epoch 17/30  train_loss=0.0168  val_loss=0.0755  val_acc=0.9812
+    early stopping at epoch 17 (no val improvement for 5 epochs)
+  -> val_accuracy=0.9990 val_f1=0.9990 val_roc_auc=0.99973625
+
+Training CNN candidate: {'base_channels': 32, 'num_blocks': 3, 'dropout': 0.4, 'epochs': 30, 'batch_size': 64, 'lr': 0.0005, 'patience': 5, 'num_workers': 2}
+    Device: mps | DataLoader workers: 2 | 16000 train / 4000 val | 250 batches/epoch
+    epoch 1/30  batch 250/250  running_train_loss=0.2510
+    epoch 1/30  train_loss=0.2510  val_loss=0.1310  val_acc=0.9778
+    epoch 2/30  batch 250/250  running_train_loss=0.0801
+    epoch 2/30  train_loss=0.0801  val_loss=0.1087  val_acc=0.9745
+    epoch 3/30  batch 250/250  running_train_loss=0.0634
+    epoch 3/30  train_loss=0.0634  val_loss=0.0237  val_acc=0.9948
+    epoch 4/30  batch 250/250  running_train_loss=0.0554
+    epoch 4/30  train_loss=0.0554  val_loss=0.0609  val_acc=0.9858
+    epoch 5/30  batch 250/250  running_train_loss=0.0487
+    epoch 5/30  train_loss=0.0487  val_loss=0.0440  val_acc=0.9882
+    epoch 6/30  batch 250/250  running_train_loss=0.0470
+    epoch 6/30  train_loss=0.0470  val_loss=0.0194  val_acc=0.9952
+    epoch 7/30  batch 250/250  running_train_loss=0.0327
+    epoch 7/30  train_loss=0.0327  val_loss=0.0214  val_acc=0.9935
+    epoch 8/30  batch 250/250  running_train_loss=0.0308
+    epoch 8/30  train_loss=0.0308  val_loss=0.0292  val_acc=0.9912
+    epoch 9/30  batch 250/250  running_train_loss=0.0312
+    epoch 9/30  train_loss=0.0312  val_loss=0.0449  val_acc=0.9838
+    epoch 10/30  batch 250/250  running_train_loss=0.0300
+    epoch 10/30  train_loss=0.0300  val_loss=0.1529  val_acc=0.9525
+    epoch 11/30  batch 250/250  running_train_loss=0.0263
+    epoch 11/30  train_loss=0.0263  val_loss=0.0255  val_acc=0.9912
+    early stopping at epoch 11 (no val improvement for 5 epochs)
+  -> val_accuracy=0.9952 val_f1=0.9952 val_roc_auc=0.9997055
+
+FROZEN model saved: artifacts/rq6/position_aware_cnn1d/frozen_models/cnn1d.pt
+Best Env1-val F1: 0.9990
+RQ6 Env1 development complete: artifacts/rq6/position_aware_cnn1d
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ python3 rq6_standing_vs_reading_single.py test --model-family cnn  --manifest artifacts/phase3/master_manifest.csv --binary-dir artifacts/phase3/binary  --branch position_aware  --architecture cnn1d  --scaler-path artifacts/phase3/scaler.json --out-dir artifacts/rq6  --num-workers 2
+PyTorch: 2.14.0
+PyTorch device: mps
+Apple Silicon MPS acceleration: ENABLED
+
+RQ6 CNN Env2 test
+Branch=position_aware  Architecture=cnn1d  amplitude_normalize=False
+Env2 test HUMAN-only: n=20000  activity balance={'Standing': 10000, 'Reading': 10000}
+
+Env2 TEST metrics (frozen Env1 model):
+  accuracy: 0.9158
+  precision: 0.939441978440076
+  recall: 0.8889
+  f1: 0.9134724077689858
+  roc_auc: 0.9760421850000001
+  tp: 8889
+  tn: 9427
+  fp: 573
+  fn: 1111
+
+Saved predictions and aggregates to: artifacts/rq6/position_aware_cnn1d
+
+Interpretation guardrail: position_aware measures separability that may be explained by posture/distance; position_normalized is the RQ6 micro-motion test.
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ python3 rq6_standing_vs_reading_single.py develop --model-family cnn  --manifest artifacts/phase3/master_manifest.csv --binary-dir artifacts/phase3/binary  --branch position_normalized  --architecture cnn2d  --scaler-path artifacts/phase3/scaler.json --out-dir artifacts/rq6  --num-workers 2
+PyTorch: 2.14.0
+PyTorch device: mps
+Apple Silicon MPS acceleration: ENABLED
+
+RQ6 CNN development
+Branch=position_normalized  Architecture=cnn2d  amplitude_normalize=False
+train HUMAN-only: n=15927  activity balance={'Standing': 7978, 'Reading': 7949}
+val HUMAN-only: n=3980  activity balance={'Standing': 1996, 'Reading': 1984}
+DataLoader workers: 2
+Position-aware = explicit posture/distance baseline; position-normalized = intended micro-motion test.
+
+
+Training CNN candidate: {'base_channels': 16, 'num_blocks': 3, 'dropout': 0.3, 'epochs': 30, 'batch_size': 64, 'lr': 0.001, 'patience': 5, 'num_workers': 2}
+    Device: mps | DataLoader workers: 2 | 15927 train / 3980 val | 249 batches/epoch
+    epoch 1/30  batch 249/249  running_train_loss=0.1120
+    epoch 1/30  train_loss=0.1120  val_loss=0.0570  val_acc=0.9834
+    epoch 2/30  batch 249/249  running_train_loss=0.0320
+    epoch 2/30  train_loss=0.0320  val_loss=0.0392  val_acc=0.9849
+    epoch 3/30  batch 249/249  running_train_loss=0.0263
+    epoch 3/30  train_loss=0.0263  val_loss=0.0352  val_acc=0.9867
+    epoch 4/30  batch 249/249  running_train_loss=0.0214
+    epoch 4/30  train_loss=0.0214  val_loss=0.0172  val_acc=0.9947
+    epoch 5/30  batch 249/249  running_train_loss=0.0215
+    epoch 5/30  train_loss=0.0215  val_loss=0.0565  val_acc=0.9834
+    epoch 6/30  batch 249/249  running_train_loss=0.0214
+    epoch 6/30  train_loss=0.0214  val_loss=0.0179  val_acc=0.9932
+    epoch 7/30  batch 249/249  running_train_loss=0.0186
+    epoch 7/30  train_loss=0.0186  val_loss=0.0135  val_acc=0.9957
+    epoch 8/30  batch 249/249  running_train_loss=0.0190
+    epoch 8/30  train_loss=0.0190  val_loss=0.0156  val_acc=0.9947
+    epoch 9/30  batch 249/249  running_train_loss=0.0160
+    epoch 9/30  train_loss=0.0160  val_loss=0.0413  val_acc=0.9857
+    epoch 10/30  batch 249/249  running_train_loss=0.0165
+    epoch 10/30  train_loss=0.0165  val_loss=0.0156  val_acc=0.9945
+    epoch 11/30  batch 249/249  running_train_loss=0.0170
+    epoch 11/30  train_loss=0.0170  val_loss=0.0114  val_acc=0.9957
+    epoch 12/30  batch 249/249  running_train_loss=0.0142
+    epoch 12/30  train_loss=0.0142  val_loss=0.0108  val_acc=0.9965
+    epoch 13/30  batch 249/249  running_train_loss=0.0130
+    epoch 13/30  train_loss=0.0130  val_loss=0.0328  val_acc=0.9897
+    epoch 14/30  batch 249/249  running_train_loss=0.0141
+    epoch 14/30  train_loss=0.0141  val_loss=0.0106  val_acc=0.9960
+    epoch 15/30  batch 249/249  running_train_loss=0.0120
+    epoch 15/30  train_loss=0.0120  val_loss=0.0062  val_acc=0.9975
+    epoch 16/30  batch 249/249  running_train_loss=0.0107
+    epoch 16/30  train_loss=0.0107  val_loss=0.0075  val_acc=0.9972
+    epoch 17/30  batch 249/249  running_train_loss=0.0102
+    epoch 17/30  train_loss=0.0102  val_loss=0.0080  val_acc=0.9970
+    epoch 18/30  batch 249/249  running_train_loss=0.0106
+    epoch 18/30  train_loss=0.0106  val_loss=0.0076  val_acc=0.9972
+    epoch 19/30  batch 249/249  running_train_loss=0.0099
+    epoch 19/30  train_loss=0.0099  val_loss=0.0101  val_acc=0.9957
+    epoch 20/30  batch 249/249  running_train_loss=0.0099
+    epoch 20/30  train_loss=0.0099  val_loss=0.0077  val_acc=0.9975
+    early stopping at epoch 20 (no val improvement for 5 epochs)
+  -> val_accuracy=0.9975 val_f1=0.9975 val_roc_auc=0.9999858588144029
+
+Training CNN candidate: {'base_channels': 32, 'num_blocks': 3, 'dropout': 0.4, 'epochs': 30, 'batch_size': 64, 'lr': 0.0005, 'patience': 5, 'num_workers': 2}
+    Device: mps | DataLoader workers: 2 | 15927 train / 3980 val | 249 batches/epoch
+    epoch 1/30  batch 249/249  running_train_loss=0.1160
+    epoch 1/30  train_loss=0.1160  val_loss=0.0392  val_acc=0.9899
+    epoch 2/30  batch 249/249  running_train_loss=0.0259
+    epoch 2/30  train_loss=0.0259  val_loss=0.0359  val_acc=0.9869
+    epoch 3/30  batch 249/249  running_train_loss=0.0232
+    epoch 3/30  train_loss=0.0232  val_loss=0.0495  val_acc=0.9842
+    epoch 4/30  batch 249/249  running_train_loss=0.0195
+    epoch 4/30  train_loss=0.0195  val_loss=0.0758  val_acc=0.9824
+    epoch 5/30  batch 249/249  running_train_loss=0.0183
+    epoch 5/30  train_loss=0.0183  val_loss=0.0216  val_acc=0.9910
+    epoch 6/30  batch 249/249  running_train_loss=0.0179
+    epoch 6/30  train_loss=0.0179  val_loss=0.0177  val_acc=0.9940
+    epoch 7/30  batch 249/249  running_train_loss=0.0187
+    epoch 7/30  train_loss=0.0187  val_loss=0.0127  val_acc=0.9947
+    epoch 8/30  batch 249/249  running_train_loss=0.0153
+    epoch 8/30  train_loss=0.0153  val_loss=0.0243  val_acc=0.9905
+    epoch 9/30  batch 249/249  running_train_loss=0.0171
+    epoch 9/30  train_loss=0.0171  val_loss=0.0142  val_acc=0.9950
+    epoch 10/30  batch 249/249  running_train_loss=0.0155
+    epoch 10/30  train_loss=0.0155  val_loss=0.0107  val_acc=0.9967
+    epoch 11/30  batch 249/249  running_train_loss=0.0131
+    epoch 11/30  train_loss=0.0131  val_loss=0.0099  val_acc=0.9962
+    epoch 12/30  batch 249/249  running_train_loss=0.0130
+    epoch 12/30  train_loss=0.0130  val_loss=0.0197  val_acc=0.9935
+    epoch 13/30  batch 249/249  running_train_loss=0.0115
+    epoch 13/30  train_loss=0.0115  val_loss=0.0099  val_acc=0.9962
+    epoch 14/30  batch 249/249  running_train_loss=0.0111
+    epoch 14/30  train_loss=0.0111  val_loss=0.0098  val_acc=0.9970
+    epoch 15/30  batch 249/249  running_train_loss=0.0112
+    epoch 15/30  train_loss=0.0112  val_loss=0.0175  val_acc=0.9922
+    epoch 16/30  batch 249/249  running_train_loss=0.0094
+    epoch 16/30  train_loss=0.0094  val_loss=0.0162  val_acc=0.9930
+    epoch 17/30  batch 249/249  running_train_loss=0.0092
+    epoch 17/30  train_loss=0.0092  val_loss=0.0157  val_acc=0.9945
+    epoch 18/30  batch 249/249  running_train_loss=0.0089
+    epoch 18/30  train_loss=0.0089  val_loss=0.0048  val_acc=0.9982
+    epoch 19/30  batch 249/249  running_train_loss=0.0085
+    epoch 19/30  train_loss=0.0085  val_loss=0.0110  val_acc=0.9962
+    epoch 20/30  batch 249/249  running_train_loss=0.0080
+    epoch 20/30  train_loss=0.0080  val_loss=0.0036  val_acc=0.9995
+    epoch 21/30  batch 249/249  running_train_loss=0.0070
+    epoch 21/30  train_loss=0.0070  val_loss=0.0041  val_acc=0.9990
+    epoch 22/30  batch 249/249  running_train_loss=0.0055
+    epoch 22/30  train_loss=0.0055  val_loss=0.0270  val_acc=0.9862
+    epoch 23/30  batch 249/249  running_train_loss=0.0055
+    epoch 23/30  train_loss=0.0055  val_loss=0.0336  val_acc=0.9824
+    epoch 24/30  batch 249/249  running_train_loss=0.0063
+    epoch 24/30  train_loss=0.0063  val_loss=0.0060  val_acc=0.9982
+    epoch 25/30  batch 249/249  running_train_loss=0.0065
+    epoch 25/30  train_loss=0.0065  val_loss=0.0031  val_acc=0.9992
+    epoch 26/30  batch 249/249  running_train_loss=0.0063
+    epoch 26/30  train_loss=0.0063  val_loss=0.0115  val_acc=0.9967
+    epoch 27/30  batch 249/249  running_train_loss=0.0061
+    epoch 27/30  train_loss=0.0061  val_loss=0.0034  val_acc=0.9995
+    epoch 28/30  batch 249/249  running_train_loss=0.0045
+    epoch 28/30  train_loss=0.0045  val_loss=0.0054  val_acc=0.9977
+    epoch 29/30  batch 249/249  running_train_loss=0.0043
+    epoch 29/30  train_loss=0.0043  val_loss=0.0053  val_acc=0.9982
+    epoch 30/30  batch 249/249  running_train_loss=0.0050
+    epoch 30/30  train_loss=0.0050  val_loss=0.0031  val_acc=0.9987
+    early stopping at epoch 30 (no val improvement for 5 epochs)
+  -> val_accuracy=0.9992 val_f1=0.9992 val_roc_auc=0.9999982323518004
+
+FROZEN model saved: artifacts/rq6/position_normalized_cnn2d/frozen_models/cnn2d.pt
+Best Env1-val F1: 0.9992
+RQ6 Env1 development complete: artifacts/rq6/position_normalized_cnn2d
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ python3 rq6_standing_vs_reading_single.py test --model-family cnn  --manifest artifacts/phase3/master_manifest.csv --binary-dir artifacts/phase3/binary  --branch position_normalized  --architecture cnn2d  --scaler-path artifacts/phase3/scaler.json --out-dir artifacts/rq6  --num-workers 2
+PyTorch: 2.14.0
+PyTorch device: mps
+Apple Silicon MPS acceleration: ENABLED
+
+RQ6 CNN Env2 test
+Branch=position_normalized  Architecture=cnn2d  amplitude_normalize=False
+Env2 test HUMAN-only: n=19440  activity balance={'Standing': 9931, 'Reading': 9509}
+
+
+Env2 TEST metrics (frozen Env1 model):
+  accuracy: 0.9686213991769548
+  precision: 0.988151398793198
+  recall: 0.9472079082974024
+  f1: 0.9672465635738832
+  roc_auc: 0.9963317825798514
+  tp: 9007
+  tn: 9823
+  fp: 108
+  fn: 502
+
+Saved predictions and aggregates to: artifacts/rq6/position_normalized_cnn2d
+
+Interpretation guardrail: position_aware measures separability that may be explained by posture/distance; position_normalized is the RQ6 micro-motion test.
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ python3 rq6_standing_vs_reading_single.py develop --model-family cnn  --manifest artifacts/phase3/master_manifest.csv --binary-dir artifacts/phase3/binary  --branch position_aware  --architecture cnn2d  --scaler-path artifacts/phase3/scaler.json --out-dir artifacts/rq6  --num-workers 2
+PyTorch: 2.14.0
+PyTorch device: mps
+Apple Silicon MPS acceleration: ENABLED
+
+RQ6 CNN development
+Branch=position_aware  Architecture=cnn2d  amplitude_normalize=False
+train HUMAN-only: n=16000  activity balance={'Standing': 8000, 'Reading': 8000}
+val HUMAN-only: n=4000  activity balance={'Standing': 2000, 'Reading': 2000}
+DataLoader workers: 2
+Position-aware = explicit posture/distance baseline; position-normalized = intended micro-motion test.
+
+
+Training CNN candidate: {'base_channels': 16, 'num_blocks': 3, 'dropout': 0.3, 'epochs': 30, 'batch_size': 64, 'lr': 0.001, 'patience': 5, 'num_workers': 2}
+    Device: mps | DataLoader workers: 2 | 16000 train / 4000 val | 250 batches/epoch
+    epoch 1/30  batch 250/250  running_train_loss=0.2280
+    epoch 1/30  train_loss=0.2280  val_loss=0.1615  val_acc=0.9800
+    epoch 2/30  batch 250/250  running_train_loss=0.0552
+    epoch 2/30  train_loss=0.0552  val_loss=0.0544  val_acc=0.9828
+    epoch 3/30  batch 250/250  running_train_loss=0.0352
+    epoch 3/30  train_loss=0.0352  val_loss=0.0188  val_acc=0.9960
+    epoch 4/30  batch 250/250  running_train_loss=0.0259
+    epoch 4/30  train_loss=0.0259  val_loss=0.0639  val_acc=0.9890
+    epoch 5/30  batch 250/250  running_train_loss=0.0310
+    epoch 5/30  train_loss=0.0310  val_loss=0.0163  val_acc=0.9972
+    epoch 6/30  batch 250/250  running_train_loss=0.0227
+    epoch 6/30  train_loss=0.0227  val_loss=0.0112  val_acc=0.9975
+    epoch 7/30  batch 250/250  running_train_loss=0.0172
+    epoch 7/30  train_loss=0.0172  val_loss=0.0775  val_acc=0.9690
+    epoch 8/30  batch 250/250  running_train_loss=0.0202
+    epoch 8/30  train_loss=0.0202  val_loss=0.0094  val_acc=0.9980
+    epoch 9/30  batch 250/250  running_train_loss=0.0183
+    epoch 9/30  train_loss=0.0183  val_loss=0.0920  val_acc=0.9650
+    epoch 10/30  batch 250/250  running_train_loss=0.0166
+    epoch 10/30  train_loss=0.0166  val_loss=0.0098  val_acc=0.9978
+    epoch 11/30  batch 250/250  running_train_loss=0.0141
+    epoch 11/30  train_loss=0.0141  val_loss=0.0192  val_acc=0.9918
+    epoch 12/30  batch 250/250  running_train_loss=0.0173
+    epoch 12/30  train_loss=0.0173  val_loss=0.0176  val_acc=0.9930
+    epoch 13/30  batch 250/250  running_train_loss=0.0139
+    epoch 13/30  train_loss=0.0139  val_loss=0.0089  val_acc=0.9982
+    epoch 14/30  batch 250/250  running_train_loss=0.0146
+    epoch 14/30  train_loss=0.0146  val_loss=0.0112  val_acc=0.9975
+    epoch 15/30  batch 250/250  running_train_loss=0.0122
+    epoch 15/30  train_loss=0.0122  val_loss=0.0172  val_acc=0.9952
+    epoch 16/30  batch 250/250  running_train_loss=0.0156
+    epoch 16/30  train_loss=0.0156  val_loss=0.0279  val_acc=0.9888
+    epoch 17/30  batch 250/250  running_train_loss=0.0144
+    epoch 17/30  train_loss=0.0144  val_loss=0.0071  val_acc=0.9982
+    epoch 18/30  batch 250/250  running_train_loss=0.0126
+    epoch 18/30  train_loss=0.0126  val_loss=0.0042  val_acc=0.9995
+    epoch 19/30  batch 250/250  running_train_loss=0.0124
+    epoch 19/30  train_loss=0.0124  val_loss=0.0160  val_acc=0.9952
+    epoch 20/30  batch 250/250  running_train_loss=0.0136
+    epoch 20/30  train_loss=0.0136  val_loss=0.0133  val_acc=0.9962
+    epoch 21/30  batch 250/250  running_train_loss=0.0114
+    epoch 21/30  train_loss=0.0114  val_loss=0.0117  val_acc=0.9955
+    epoch 22/30  batch 250/250  running_train_loss=0.0114
+    epoch 22/30  train_loss=0.0114  val_loss=0.0451  val_acc=0.9912
+    epoch 23/30  batch 250/250  running_train_loss=0.0110
+    epoch 23/30  train_loss=0.0110  val_loss=2.4896  val_acc=0.5360
+    early stopping at epoch 23 (no val improvement for 5 epochs)
+  -> val_accuracy=0.9995 val_f1=0.9995 val_roc_auc=0.9999942500000001
+
+Training CNN candidate: {'base_channels': 32, 'num_blocks': 3, 'dropout': 0.4, 'epochs': 30, 'batch_size': 64, 'lr': 0.0005, 'patience': 5, 'num_workers': 2}
+    Device: mps | DataLoader workers: 2 | 16000 train / 4000 val | 250 batches/epoch
+    epoch 1/30  batch 250/250  running_train_loss=0.2252
+    epoch 1/30  train_loss=0.2252  val_loss=0.0964  val_acc=0.9780
+    epoch 2/30  batch 250/250  running_train_loss=0.0598
+    epoch 2/30  train_loss=0.0598  val_loss=0.0529  val_acc=0.9822
+    epoch 3/30  batch 250/250  running_train_loss=0.0359
+    epoch 3/30  train_loss=0.0359  val_loss=0.0328  val_acc=0.9908
+    epoch 4/30  batch 250/250  running_train_loss=0.0290
+    epoch 4/30  train_loss=0.0290  val_loss=0.0849  val_acc=0.9752
+    epoch 5/30  batch 250/250  running_train_loss=0.0263
+    epoch 5/30  train_loss=0.0263  val_loss=0.0863  val_acc=0.9812
+    epoch 6/30  batch 250/250  running_train_loss=0.0196
+    epoch 6/30  train_loss=0.0196  val_loss=0.0334  val_acc=0.9885
+    epoch 7/30  batch 250/250  running_train_loss=0.0204
+    epoch 7/30  train_loss=0.0204  val_loss=0.0095  val_acc=0.9978
+    epoch 8/30  batch 250/250  running_train_loss=0.0176
+    epoch 8/30  train_loss=0.0176  val_loss=0.0148  val_acc=0.9968
+    epoch 9/30  batch 250/250  running_train_loss=0.0173
+    epoch 9/30  train_loss=0.0173  val_loss=0.0334  val_acc=0.9872
+    epoch 10/30  batch 250/250  running_train_loss=0.0163
+    epoch 10/30  train_loss=0.0163  val_loss=0.0079  val_acc=0.9978
+    epoch 11/30  batch 250/250  running_train_loss=0.0127
+    epoch 11/30  train_loss=0.0127  val_loss=0.0075  val_acc=0.9985
+    epoch 12/30  batch 250/250  running_train_loss=0.0178
+    epoch 12/30  train_loss=0.0178  val_loss=0.0111  val_acc=0.9982
+    epoch 13/30  batch 250/250  running_train_loss=0.0122
+    epoch 13/30  train_loss=0.0122  val_loss=0.0046  val_acc=0.9992
+    epoch 14/30  batch 250/250  running_train_loss=0.0135
+    epoch 14/30  train_loss=0.0135  val_loss=0.0048  val_acc=0.9992
+    epoch 15/30  batch 250/250  running_train_loss=0.0112
+    epoch 15/30  train_loss=0.0112  val_loss=0.0056  val_acc=0.9990
+    epoch 16/30  batch 250/250  running_train_loss=0.0103
+    epoch 16/30  train_loss=0.0103  val_loss=0.0046  val_acc=0.9988
+    epoch 17/30  batch 250/250  running_train_loss=0.0105
+    epoch 17/30  train_loss=0.0105  val_loss=0.0044  val_acc=0.9992
+    epoch 18/30  batch 250/250  running_train_loss=0.0118
+    epoch 18/30  train_loss=0.0118  val_loss=0.0040  val_acc=0.9995
+    epoch 19/30  batch 250/250  running_train_loss=0.0093
+    epoch 19/30  train_loss=0.0093  val_loss=0.0030  val_acc=0.9998
+    epoch 20/30  batch 250/250  running_train_loss=0.0112
+    epoch 20/30  train_loss=0.0112  val_loss=0.0065  val_acc=0.9998
+    epoch 21/30  batch 250/250  running_train_loss=0.0095
+    epoch 21/30  train_loss=0.0095  val_loss=0.0050  val_acc=0.9982
+    epoch 22/30  batch 250/250  running_train_loss=0.0080
+    epoch 22/30  train_loss=0.0080  val_loss=0.0030  val_acc=0.9992
+    epoch 23/30  batch 250/250  running_train_loss=0.0082
+    epoch 23/30  train_loss=0.0082  val_loss=0.0049  val_acc=0.9990
+    epoch 24/30  batch 250/250  running_train_loss=0.0099
+    epoch 24/30  train_loss=0.0099  val_loss=0.0041  val_acc=0.9980
+    early stopping at epoch 24 (no val improvement for 5 epochs)
+  -> val_accuracy=0.9998 val_f1=0.9997 val_roc_auc=0.9999982500000001
+
+FROZEN model saved: artifacts/rq6/position_aware_cnn2d/frozen_models/cnn2d.pt
+Best Env1-val F1: 0.9997
+RQ6 Env1 development complete: artifacts/rq6/position_aware_cnn2d
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ python3 rq6_standing_vs_reading_single.py test --model-family cnn  --manifest artifacts/phase3/master_manifest.csv --binary-dir artifacts/phase3/binary  --branch position_aware  --architecture cnn2d  --scaler-path artifacts/phase3/scaler.json --out-dir artifacts/rq6  --num-workers 2
+PyTorch: 2.14.0
+PyTorch device: mps
+Apple Silicon MPS acceleration: ENABLED
+
+RQ6 CNN Env2 test
+Branch=position_aware  Architecture=cnn2d  amplitude_normalize=False
+Env2 test HUMAN-only: n=20000  activity balance={'Standing': 10000, 'Reading': 10000}
+
+Env2 TEST metrics (frozen Env1 model):
+  accuracy: 0.9713
+  precision: 0.9756762212353653
+  recall: 0.9667
+  f1: 0.9711673699015471
+  roc_auc: 0.99670457
+  tp: 9667
+  tn: 9759
+  fp: 241
+  fn: 333
+
+Saved predictions and aggregates to: artifacts/rq6/position_aware_cnn2d
+
+Interpretation guardrail: position_aware measures separability that may be explained by posture/distance; position_normalized is the RQ6 micro-motion test.
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ python3 rq6_standing_vs_reading_single.py develop  --model-family classical  --manifest artifacts/phase3/master_manifest.csv  --feature-set full  --out-dir artifacts/rq6  --num-workers 2
+
+RQ6 classical development
+Feature set=full
+Features=['mean', 'std', 'rms', 'peak', 'peak_to_peak', 'crest_factor', 'dominant_frequency_hz', 'band_energy', 'band_energy_fraction']
+train HUMAN-only: n=16000  activity balance={'Standing': 8000, 'Reading': 8000}
+val HUMAN-only: n=4000  activity balance={'Standing': 2000, 'Reading': 2000}
+
+Tuning random_forest...
+  random_forest hp={'n_estimators': 100, 'max_depth': None} -> val_accuracy=0.9535 val_f1=0.9527
+  random_forest hp={'n_estimators': 200, 'max_depth': 10} -> val_accuracy=0.9233 val_f1=0.9186
+  FROZEN random_forest: val_f1=0.9527 -> artifacts/rq6/frozen_models/random_forest.joblib
+
+Tuning linear...
+  linear hp={'C': 0.1} -> val_accuracy=0.9195 val_f1=0.9165
+  linear hp={'C': 1.0} -> val_accuracy=0.9330 val_f1=0.9325
+  linear hp={'C': 10.0} -> val_accuracy=0.9350 val_f1=0.9349
+  FROZEN linear: val_f1=0.9349 -> artifacts/rq6/frozen_models/linear.joblib
+
+Tuning xgboost...
+Segmentation fault: 11
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ python3 rq6_standing_vs_reading_single.py test  --model-family classical  --manifest artifacts/phase3/master_manifest.csv  --feature-set full  --out-dir artifacts/rq6  --num-workers 2
+
+RQ6 classical Env2 test
+Env2 test HUMAN-only: n=20000  activity balance={'Standing': 10000, 'Reading': 10000}
+  random_forest: accuracy=0.7291 precision=0.7397 recall=0.7070 f1=0.7230 roc_auc=0.82122763
+  linear: accuracy=0.7410 precision=0.7412 recall=0.7405 f1=0.7409 roc_auc=0.7911498899999998
+
+RQ6 classical Env2 test complete: artifacts/rq6
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ python3 rq6_standing_vs_reading_single.py develop  --model-family classical --manifest artifacts/phase4/shape_feature_manifest.csv --feature-set shape_invariant --out-dir artifacts/rq6  --num-workers 2
+
+RQ6 classical development
+Feature set=shape_invariant
+Features=['std_over_peak', 'peak_to_peak_over_peak', 'crest_factor', 'dominant_frequency_hz', 'band_energy_fraction']
+train HUMAN-only: n=15927  activity balance={'Standing': 7978, 'Reading': 7949}
+val HUMAN-only: n=3980  activity balance={'Standing': 1996, 'Reading': 1984}
+
+Tuning random_forest...
+  random_forest hp={'n_estimators': 100, 'max_depth': None} -> val_accuracy=0.9802 val_f1=0.9803
+  random_forest hp={'n_estimators': 200, 'max_depth': 10} -> val_accuracy=0.9804 val_f1=0.9806
+  FROZEN random_forest: val_f1=0.9806 -> artifacts/rq6/frozen_models/random_forest.joblib
+
+Tuning linear...
+  linear hp={'C': 0.1} -> val_accuracy=0.9706 val_f1=0.9709
+  linear hp={'C': 1.0} -> val_accuracy=0.9729 val_f1=0.9731
+  linear hp={'C': 10.0} -> val_accuracy=0.9734 val_f1=0.9735
+  FROZEN linear: val_f1=0.9735 -> artifacts/rq6/frozen_models/linear.joblib
+
+Tuning xgboost...
+Segmentation fault: 11
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ python3 rq6_standing_vs_reading_single.py test  --model-family classical --manifest artifacts/phase4/shape_feature_manifest.csv --feature-set shape_invariant --out-dir artifacts/rq6  --num-workers 2
+
+RQ6 classical Env2 test
+Env2 test HUMAN-only: n=19440  activity balance={'Standing': 9931, 'Reading': 9509}
+  random_forest: accuracy=0.8895 precision=0.9045 recall=0.8655 f1=0.8846 roc_auc=0.9604692294806614
+  linear: accuracy=0.7957 precision=0.8509 recall=0.7060 f1=0.7717 roc_auc=0.871841815372214
+
+RQ6 classical Env2 test complete: artifacts/rq6
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ python3 -c "import xgboost; print('XGBoost:', xgboost.__version__)"
+XGBoost: 3.4.1
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ python3 -c "import xgboost; print(xgboost.__file__)"
+/Users/mandarkale/Desktop/Individual_Project/Chap7/venv/lib/python3.13/site-packages/xgboost/__init__.py
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ python3 /mnt/data/rq6_standing_vs_reading_single.py smoke \  --manif
+est artifacts/phase3/master_manifest.csv
+/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/Resources/Python.app/Contents/MacOS/Python: can't open file '/mnt/data/rq6_standing_vs_reading_single.py': [Errno 2] No such file or directory
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ python3 rq6_standing_vs_reading_single.py smoke --manifest artifacts
+/phase3/master_manifest.csv
+usage: rq6_standing_vs_reading_single.py [-h] {smoke,develop,test,all} ...
+rq6_standing_vs_reading_single.py: error: unrecognized arguments: --manifest artifacts/phase3/master_manifest.csv
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ python3 rq6_standing_vs_reading_single.py smoke --manifest artifacts/phase3/master_manifest.csv
+usage: rq6_standing_vs_reading_single.py [-h] {smoke,develop,test,all} ...
+rq6_standing_vs_reading_single.py: error: unrecognized arguments: --manifest artifacts/phase3/master_manifest.csv
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ python rq6_standing_vs_reading_single.py smoke --manifest artifacts/
+phase3/master_manifest.csv
+usage: rq6_standing_vs_reading_single.py [-h] {smoke,develop,test,all} ...
+rq6_standing_vs_reading_single.py: error: unrecognized arguments: --manifest artifacts/phase3/master_manifest.csv
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ deactivate 
+Mandars-MacBook-Pro:Chap7 mandarkale$ 
+Mandars-MacBook-Pro:Chap7 mandarkale$ 
+Mandars-MacBook-Pro:Chap7 mandarkale$ source venv/bin/activate
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ python rq6_standing_vs_reading_single.py smoke --manifest artifacts/phase3/master_manifest.csv
+usage: rq6_standing_vs_reading_single.py [-h] {smoke,develop,test,all} ...
+rq6_standing_vs_reading_single.py: error: unrecognized arguments: --manifest artifacts/phase3/master_manifest.csv
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ python rq6_standing_vs_reading_single.py smoke
+RQ6 standalone smoke tests
+scikit-learn available: True
+scipy available: True
+xgboost available: True
+torch available: True
+PyTorch: 2.14.0
+PyTorch device: mps
+Apple Silicon MPS acceleration: ENABLED
+PASS: CNN1D 25,000/4,900-sample shapes
+PASS: CNN2D 5x783/5x155 shapes
+    epoch 1/4  train_loss=0.7565  val_loss=0.5976  val_acc=1.0000
+    epoch 2/4  train_loss=0.7356  val_loss=0.5906  val_acc=1.0000
+    epoch 3/4  train_loss=0.7163  val_loss=0.5820  val_acc=1.0000
+    epoch 4/4  train_loss=0.6973  val_loss=0.5676  val_acc=1.0000
+PASS: CNN training smoke test
+PASS: classical Random Forest smoke test
+ALL AVAILABLE SMOKE TESTS PASSED
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ python3 rq6_standing_vs_reading_single.py develop  --model-family classical  --manifest artifacts/phase3/master_manifest.csv  --feature-set full  --out-dir artifacts/rq6  --num-workers 2
+
+RQ6 classical development
+Feature set=full
+Features=['mean', 'std', 'rms', 'peak', 'peak_to_peak', 'crest_factor', 'dominant_frequency_hz', 'band_energy', 'band_energy_fraction']
+train HUMAN-only: n=16000  activity balance={'Standing': 8000, 'Reading': 8000}
+val HUMAN-only: n=4000  activity balance={'Standing': 2000, 'Reading': 2000}
+
+Tuning random_forest...
+  random_forest hp={'n_estimators': 100, 'max_depth': None} -> val_accuracy=0.9535 val_f1=0.9527
+  random_forest hp={'n_estimators': 200, 'max_depth': 10} -> val_accuracy=0.9233 val_f1=0.9186
+  FROZEN random_forest: val_f1=0.9527 -> artifacts/rq6/frozen_models/random_forest.joblib
+
+Tuning linear...
+  linear hp={'C': 0.1} -> val_accuracy=0.9195 val_f1=0.9165
+  linear hp={'C': 1.0} -> val_accuracy=0.9330 val_f1=0.9325
+  linear hp={'C': 10.0} -> val_accuracy=0.9350 val_f1=0.9349
+  FROZEN linear: val_f1=0.9349 -> artifacts/rq6/frozen_models/linear.joblib
+
+Tuning xgboost...
+Segmentation fault: 11
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ python rq6_standing_vs_reading_single.py develop  --model-family classical  --manifest artifacts/phase4/shape_feature_manifest.csv  --feature-set shape_invariant  --out-dir artifacts/rq6/position_normalized_classical
+
+RQ6 classical development
+Feature set=shape_invariant
+Features=['std_over_peak', 'peak_to_peak_over_peak', 'crest_factor', 'dominant_frequency_hz', 'band_energy_fraction']
+train HUMAN-only: n=15927  activity balance={'Standing': 7978, 'Reading': 7949}
+val HUMAN-only: n=3980  activity balance={'Standing': 1996, 'Reading': 1984}
+
+Tuning random_forest...
+  random_forest hp={'n_estimators': 100, 'max_depth': None} -> val_accuracy=0.9802 val_f1=0.9803
+  random_forest hp={'n_estimators': 200, 'max_depth': 10} -> val_accuracy=0.9804 val_f1=0.9806
+  FROZEN random_forest: val_f1=0.9806 -> artifacts/rq6/position_normalized_classical/frozen_models/random_forest.joblib
+
+Tuning linear...
+  linear hp={'C': 0.1} -> val_accuracy=0.9706 val_f1=0.9709
+  linear hp={'C': 1.0} -> val_accuracy=0.9729 val_f1=0.9731
+  linear hp={'C': 10.0} -> val_accuracy=0.9734 val_f1=0.9735
+  FROZEN linear: val_f1=0.9735 -> artifacts/rq6/position_normalized_classical/frozen_models/linear.joblib
+
+Tuning xgboost...
+Segmentation fault: 11
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ python3 -m py_compile rq6_standing_vs_reading_single.py
+(venv) Mandars-MacBook-Pro:Chap7 mandarkale$ 
