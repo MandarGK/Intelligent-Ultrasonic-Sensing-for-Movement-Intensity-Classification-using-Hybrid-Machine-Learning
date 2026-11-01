@@ -1,4 +1,4 @@
-# Intelligent_Ultrasonic_Sensing_for_Movement_Intensity_Classification_using_Hybrid_Machine_Learning — Chapter 7 Code
+# Intelligent_Ultrasonic_Sensing_for_Movement_Intensity_Classification_using_Hybrid_Machine_Learning
 
 ## Project overview
 
